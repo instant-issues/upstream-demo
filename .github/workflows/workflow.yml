@@ -1,0 +1,19 @@
+# To use this workflow copy this file to .github/workflows/aggregate-issues.yml
+
+name: Aggregate issues for Instant Issues
+
+on:
+  schedule:
+    - cron:  '0 * * * *'
+  issues:
+    types: [opened, closed, edited, deleted]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: instant-issues/instant-issues.github.io/github-action-upstream@master
+      with:
+        repo: ${{ github.repository }}
+        token: ${{ secrets.GITHUB_TOKEN }}
